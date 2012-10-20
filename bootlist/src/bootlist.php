@@ -24,8 +24,10 @@
     $path = $_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . $_SERVER[ 'REQUEST_URI' ];
     if ( ( $folder = @opendir( $path ) ) === false) die( 'Unexpected error' );
     while ( ( $name = readdir( $folder ) ) !== false ) :
+        $entryPath = $path . DIRECTORY_SEPARATOR . $name;
+        if ( ! @stat( $entryPath ) )
+            continue;
         if ( $name[ 0 ] !== '.' || $name === '..' ) :
-            $entryPath = $path . DIRECTORY_SEPARATOR . $name;
             if ( is_dir( $entryPath ) ) :
                 $directories[ ] = $name;
             else :
