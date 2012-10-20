@@ -18,7 +18,7 @@
     define( 'BOOTLIST_ROOT', dirname( $_SERVER['SCRIPT_NAME'] ) );
 
     $directories = array( );
-    $entries = array( );
+    $files = array( );
 
     $fileinfo = new FInfo( FILEINFO_MIME, '/usr/share/misc/magic.mgc' );
     $path = $_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . $_SERVER[ 'REQUEST_URI' ];
@@ -31,16 +31,15 @@
             if ( is_dir( $entryPath ) ) :
                 $directories[ ] = $name;
             else :
-                $entries[ $fileinfo->file( $entryPath ) ][ ] = $name;
+                $files[ $fileinfo->file( $entryPath ) ][ ] = $name;
             endif ;
         endif ;
     endwhile ;
 
     sort( $directories );
-    ksort( $entries );
-    foreach ( $type as &$entries ) {
+    ksort( $files );
+    foreach ( $files as & $entries )
         sort( $entries );
-    }
 ?>
 <!doctype html>
 <html>
@@ -66,9 +65,9 @@
                     <td><a href="<?php echo htmlentities( $directory, ENT_QUOTES ); ?>"><?php echo htmlentities( $directory ); ?></a></td>
                 </tr>
             <?php endforeach ?>
-            <?php foreach ( $entries as $type => $list ) : ?>
+            <?php foreach ( $files as $type => $entries ) : ?>
                 <?php $icon = getIcon( $type ); ?>
-                <?php foreach ( $list as $entry ) : ?>
+                <?php foreach ( $entries as $entry ) : ?>
                     <tr>
                         <td><i class="<?php echo $icon; ?>"></i></td>
                         <td><a href="<?php echo htmlentities( $entry, ENT_QUOTES ); ?>"><?php echo htmlentities( $entry ) ?></a></td>
