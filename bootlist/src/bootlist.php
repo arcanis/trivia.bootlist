@@ -38,8 +38,8 @@
 
     sort( $directories );
     ksort( $files );
-    foreach ( $files as & $entries )
-        sort( $entries );
+    foreach ( $files as &$type => $entries )
+        sort( $files[ $type ] );
 ?>
 <!doctype html>
 <html>
