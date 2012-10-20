@@ -15,10 +15,12 @@
         return 'icon-file';
     }
 
-    function humanFilesize( $bytes, $decimals = 2 ) {
-        $sz = 'BKMGTP';
-        $factor = floor( ( strlen( $bytes ) - 1 ) / 3 );
-        return sprintf( "%.{$decimals}f", $bytes / pow( 1024, $factor ) ) . @$sz[ $factor ];
+    function byteConvert( $bytes )
+    {
+        $s = array( 'B', 'Kb', 'MB', 'GB', 'TB', 'PB' );
+        $e = floor( log( $bytes ) / log( 1024 ) );
+
+        return sprintf( '%.2f %s', ( $bytes / pow( 1024, floor( $e ) ) ), $s[ $e ] );
     }
 
     define( 'BOOTLIST_ROOT', dirname( $_SERVER['SCRIPT_NAME'] ) );
@@ -81,7 +83,7 @@
                     <tr>
                         <td><i class="<?php echo $icon; ?>"></i></td>
                         <td><a href="<?php echo htmlentities( $entry[ 'name' ], ENT_QUOTES ); ?>"><?php echo htmlentities( $entry[ 'name' ] ); ?></a></td>
-                        <td><?php echo humanFilesize( $entry[ 'path' ] ); ?></td>
+                        <td><?php echo humanFilesize( filesize( $entry[ 'path' ] ) ); ?></td>
                     </tr>
                 <?php endforeach ?>
             <?php endforeach ?>
