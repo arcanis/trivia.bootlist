@@ -64,16 +64,21 @@
         <table class="table" data-provides="rowlink">
             <colgroup>
                 <col width="40" />
+                <col width="300" />
+                <col width="200" />
                 <col width="*" />
             </colgroup>
             <tr>
                 <th></th>
                 <th>Entry name</th>
+                <th>Size</th>
+                <th></th>
             </tr>
             <?php foreach ( $directories as $directory ): ?>
                 <tr>
                     <td><i class="icon-folder-close"></i></td>
                     <td><a href="<?php echo htmlentities( $directory, ENT_QUOTES ); ?>"><?php echo htmlentities( $directory ); ?></a></td>
+                    <td></td>
                     <td></td>
                 </tr>
             <?php endforeach ?>
@@ -84,6 +89,7 @@
                         <td><i class="<?php echo $icon; ?>"></i></td>
                         <td><a href="<?php echo htmlentities( $entry[ 'name' ], ENT_QUOTES ); ?>"><?php echo htmlentities( $entry[ 'name' ] ); ?></a></td>
                         <td><?php echo humanFilesize( filesize( $entry[ 'path' ] ) ); ?></td>
+                        <td></td>
                     </tr>
                 <?php endforeach ?>
             <?php endforeach ?>
