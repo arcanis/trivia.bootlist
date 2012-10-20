@@ -15,6 +15,12 @@
         return 'icon-file';
     }
 
+    function humanFilesize( $bytes, $decimals = 2 ) {
+        $sz = 'BKMGTP';
+        $factor = floor( ( strlen( $bytes ) - 1 ) / 3 );
+        return sprintf( "%.{$decimals}f", $bytes / pow( 1024, $factor ) ) . @$sz[ $factor ];
+    }
+
     define( 'BOOTLIST_ROOT', dirname( $_SERVER['SCRIPT_NAME'] ) );
 
     $directories = array( );
@@ -31,7 +37,10 @@
             if ( is_dir( $entryPath ) ) :
                 $directories[ ] = $name;
             else :
-                $files[ $fileinfo->file( $entryPath ) ][ ] = $name;
+                $files[ $fileinfo->file( $entryPath ) ][ ] = array(
+                    'name' => $name,
+                    'path' => $entryPath,
+                );
             endif ;
         endif ;
     endwhile ;
@@ -63,6 +72,7 @@
                 <tr>
                     <td><i class="icon-folder-close"></i></td>
                     <td><a href="<?php echo htmlentities( $directory, ENT_QUOTES ); ?>"><?php echo htmlentities( $directory ); ?></a></td>
+                    <td></td>
                 </tr>
             <?php endforeach ?>
             <?php foreach ( $files as $type => $entries ) : ?>
@@ -70,7 +80,8 @@
                 <?php foreach ( $entries as $entry ) : ?>
                     <tr>
                         <td><i class="<?php echo $icon; ?>"></i></td>
-                        <td><a href="<?php echo htmlentities( $entry, ENT_QUOTES ); ?>"><?php echo htmlentities( $entry ) ?></a></td>
+                        <td><a href="<?php echo htmlentities( $entry[ 'name' ], ENT_QUOTES ); ?>"><?php echo htmlentities( $entry[ 'name' ] ); ?></a></td>
+                        <td><?php echo humanFilesize( $entry[ 'path' ] ); ?></td>
                     </tr>
                 <?php endforeach ?>
             <?php endforeach ?>
