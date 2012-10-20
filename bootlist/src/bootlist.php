@@ -15,7 +15,7 @@
         return 'icon-file';
     }
 
-    function byteConvert( $bytes )
+    function humanFilesize( $bytes )
     {
         $s = array( 'B', 'Kb', 'MB', 'GB', 'TB', 'PB' );
         $e = floor( log( $bytes ) / log( 1024 ) );
