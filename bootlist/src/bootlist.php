@@ -35,6 +35,12 @@
             endif ;
         endif ;
     endwhile ;
+
+    sort( $directories );
+    ksort( $entries );
+    foreach ( $type as &$entries ) {
+        sort( $entries );
+    }
 ?>
 <!doctype html>
 <html>
