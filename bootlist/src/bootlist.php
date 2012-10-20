@@ -22,7 +22,7 @@
 
     $fileinfo = new FInfo( FILEINFO_MIME, '/usr/share/misc/magic.mgc' );
     $path = $_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . $_SERVER[ 'REQUEST_URI' ];
-    if ( ( $folder = opendir( $path ) ) === false) die( 'Unexpected error' );
+    if ( ( $folder = @opendir( $path ) ) === false) die( 'Unexpected error' );
     while ( ( $name = readdir( $folder ) ) !== false ) :
         if ( $name[ 0 ] !== '.' || $name === '..' ) :
             $entryPath = $path . DIRECTORY_SEPARATOR . $name;
