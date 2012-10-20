@@ -9,7 +9,7 @@ makedepends=('git')
 
 build() {
 
-    git clone git://github.com/arcanis/trivia.bootlist.git bootlist-repo
+    git clone git://github.com/arcanis/trivia.bootlist.git startdir/bootlist-repo
     install -d $pkgdir/usr/share/webapps/
     cp -dPr --no-preserve=ownership $startdir/bootlist-repo/bootlist $pkgdir/usr/share/webapps/bootlist
 
