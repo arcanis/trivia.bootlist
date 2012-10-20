@@ -47,7 +47,7 @@
 
     sort( $directories );
     ksort( $files );
-    foreach ( $files as &$type => $entries )
+    foreach ( $files as $type => $entries )
         sort( $files[ $type ] );
 ?>
 <!doctype html>
